@@ -1,0 +1,23 @@
+{
+  "name": "8thlightreadinglist",
+  "version": "1.0.0",
+  "description": "Using Google Books API to create a Reading List!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikulp97/ReadingList.git"
+  },
+  "author": "Nikul Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikulp97/ReadingList/issues"
+  },
+  "homepage": "https://github.com/nikulp97/ReadingList#readme",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3"
+  }
+}
