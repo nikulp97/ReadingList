@@ -5,10 +5,10 @@ const { viewList } = require('./src/viewList');
 //Users can select either of these three cases
 switch (process.argv[2]) {
   case 'search':
-    searchResults(process.argv[2]);
+    searchResults(process.argv[3]);
     break;
   case 'save':
-    saveByNumber(process.argv[2] - 1);
+    saveByNumber(process.argv[3] - 1);
     break;
   case 'view':
     viewList();

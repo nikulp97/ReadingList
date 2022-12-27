@@ -9,7 +9,6 @@ const saveToFile = (file, recentSearch) => {
 const readFile = (file) => {
   try {
     return JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }));
-    console.log('we here');
   } catch {
     return undefined;
   }
