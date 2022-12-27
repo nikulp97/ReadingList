@@ -16,8 +16,8 @@ const searchResults = async (search) => {
     return books.map((book, key) =>
       console.log(
         `\nNumber:${key + 1}
-        Title:${book.volumeInfo.title}
-        Authors:${book.volumeInfo.authors}
+        Title: ${book.volumeInfo.title}
+        Authors: ${book.volumeInfo.authors}
         Publishing Company: ${book.volumeInfo.publisher}\n`
       )
     );

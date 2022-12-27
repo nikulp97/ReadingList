@@ -6,8 +6,8 @@ const viewList = () => {
 
   const list = currentList.map((book) =>
     console.log(
-      ` Title:${book.volumeInfo.title}
-        Authors:${book.volumeInfo.authors}
+      ` Title: ${book.volumeInfo.title}
+        Authors: ${book.volumeInfo.authors}
         Publishing Company: ${book.volumeInfo.publisher}\n`
     )
   );
