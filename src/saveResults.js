@@ -24,11 +24,10 @@ const saveByNumber = (number) => {
 
   //Selecting the specific book choosen by the user
   if (number < 0 || number > 4) {
-    console.log('Please select a valid number.');
+    console.log('Please select a valid number.'); //invalid number entry by user
   } else {
-    const bookAdded = recentFiveSearched[number];
-    let duplicate = false;
-
+    const bookAdded = recentFiveSearched[number]; //book selected by user
+    let duplicate = false; //boolean to check if user already added the book to list
     let currentList = readFile(readingList); //Get the current reading list
 
     //If reading list is empty we initialize it with the book of choice, if it is not we add it.
@@ -38,6 +37,7 @@ const saveByNumber = (number) => {
         `\nBook has been added to the list. You have ${currentList.length} book(s) on your list now.`
       );
     } else {
+      //logic to look through current reading list to make sure we are not adding duplicates
       for (let i = 0; i < currentList.length; i++) {
         if (bookAdded.id === currentList[i].id) {
           console.log('You already added this book to your list!');
@@ -52,6 +52,7 @@ const saveByNumber = (number) => {
         );
       }
     }
+    //update readingList.json file
     return saveToFile(readingList, currentList);
   }
 };
