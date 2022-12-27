@@ -5,7 +5,7 @@ const { saveToFile } = require('./saveResults');
 const searchResults = async (search) => {
   try {
     const booksFound = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&startIndex=0&maxResults=5&projection=lite&key=${process.env.key}`
+      `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&startIndex=0&maxResults=5&projection=lite`
     );
 
     let books = booksFound.data.items;
