@@ -29,6 +29,15 @@ down below!
 - Dotenv module to load environment variables (our API key) to process.env
 - Node.js File System (fs) to work with file systems in our machine. Used to update readingList.json & RecentSearch.json
 
+# Edge Cases/What I learned
+
+- Fixed edge case where a user can add the same book to the reading list
+- Fixed edge case where user can save a book without being in the specific number range a
+- Fixed edge case where user can save a book with letters or symbols
+- Issue still facing: API key stored in dotenv file, however causes issues when I clone the repository again.
+  Need to figure out how to make API key usable for other users. Currently, application works
+  fine without API key.
+
 # Future Improvements
 
 - Remove or delete the entire reading list
