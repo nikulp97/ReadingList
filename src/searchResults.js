@@ -15,7 +15,7 @@ const searchResults = async (search) => {
     //mapping through the 5 books found and showing only title, author, and publishing company
     return books.map((book, key) =>
       console.log(
-        `Number:${key + 1}
+        `\nNumber:${key + 1}
         Title:${book.volumeInfo.title}
         Authors:${book.volumeInfo.authors}
         Publishing Company: ${book.volumeInfo.publisher}\n`

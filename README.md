@@ -3,7 +3,7 @@
 # Set Up
 
 1. Clone Repo in Terminal: "git clone git@github.com:nikulp97/ReadingList.git"
-2. Navigate into Folder: "cd 8thlightReadingList"
+2. Navigate into Folder: "cd ReadingList"
 3. Type "npm install" to download all the necessary dependencies.
 4. Type "touch readingList.json" in terminal to store information of books we want to read!
 5. Type "touch RecentSearch.json" in terminal to store information of books we searched for!
