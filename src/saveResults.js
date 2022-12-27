@@ -22,7 +22,7 @@ const saveByNumber = (number) => {
   const readingList = 'readingList.json';
 
   //Selecting the specific book choosen by the user
-  if (number < 1 || number > 5) {
+  if (number < 0 || number > 4) {
     console.log('Please select a valid number.');
   } else {
     const bookAdded = recentFiveSearched[number];
