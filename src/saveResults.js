@@ -18,27 +18,30 @@ const readFile = (file) => {
 const saveByNumber = (number) => {
   //Variable to hold the 5 books on the last search
   const recentFiveSearched = readFile('RecentSearch.json');
-
-  //Selecting the specific book choosen by the user
-  const bookAdded = recentFiveSearched[number];
-
   //Variable to hold reading list location
   const readingList = 'readingList.json';
 
-  //Get the current reading list
-  let currentList = readFile(readingList);
-
-  //If reading list is empty we initialize it with the book of choice, if it is not we add it.
-  if (currentList === undefined) {
-    currentList = [bookAdded];
+  //Selecting the specific book choosen by the user
+  if (number < 1 || number > 5) {
+    console.log('Please select a valid number.');
   } else {
-    currentList.push(bookAdded);
-  }
+    const bookAdded = recentFiveSearched[number];
 
-  console.log(
-    `Book has been added to the list. You have ${currentList.length} book(s) on your list now.`
-  );
-  return saveToFile(readingList, currentList);
+    //Get the current reading list
+    let currentList = readFile(readingList);
+
+    //If reading list is empty we initialize it with the book of choice, if it is not we add it.
+    if (currentList === undefined) {
+      currentList = [bookAdded];
+    } else {
+      currentList.push(bookAdded);
+    }
+
+    console.log(
+      `Book has been added to the list. You have ${currentList.length} book(s) on your list now.`
+    );
+    return saveToFile(readingList, currentList);
+  }
 };
 
 module.exports = { saveToFile, saveByNumber, readFile };

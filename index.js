@@ -8,7 +8,12 @@ switch (process.argv[2]) {
     searchResults(process.argv[3]);
     break;
   case 'save':
-    saveByNumber(process.argv[3] - 1);
+    if (isNaN(process.argv[3])) {
+      console.log('Please select a valid number');
+      break;
+    } else {
+      saveByNumber(process.argv[3] - 1);
+    }
     break;
   case 'view':
     viewList();
