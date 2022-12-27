@@ -1,5 +1,5 @@
-const axios = require('axios');
-require('dotenv').config();
+const axios = require('axios'); //To retrieve information from Google Books API
+require('dotenv').config(); // module that allows us to access environmental variables
 const { saveToFile } = require('./saveResults');
 
 const searchResults = async (search) => {
@@ -7,10 +7,12 @@ const searchResults = async (search) => {
     const booksFound = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&startIndex=0&maxResults=5&projection=lite&key=${process.env.key}`
     );
+
     let books = booksFound.data.items;
 
     saveToFile('RecentSearch.json', books);
 
+    //mapping through the 5 books found and showing only title, author, and publishing company
     return books.map((book, key) =>
       console.log(
         `Number:${key + 1}

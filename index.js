@@ -2,6 +2,7 @@ const { searchResults } = require('./src/searchResults');
 const { saveByNumber } = require('./src/saveResults.js');
 const { viewList } = require('./src/viewList');
 
+//Users can select either of these three cases
 switch (process.argv[2]) {
   case 'search':
     searchResults(process.argv[3]);
