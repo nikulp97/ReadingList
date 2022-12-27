@@ -43,3 +43,4 @@ down below!
 - Remove or delete the entire reading list
 - Update order of reading list
 - Stop users from inserting the same book to reading list.
+- Work on writing test-cases (in process) from the beginning to lay the ground work.
