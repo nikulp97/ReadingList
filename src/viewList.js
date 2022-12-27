@@ -3,7 +3,7 @@ const { readFile } = require('./saveResults');
 
 const viewList = () => {
   const currentList = readFile('readingList.json');
-  console.log(`${currentList.length} total books in your Reading List!`);
+  console.log(`\n${currentList.length} total books in your Reading List!`);
   const list = currentList.map((book) =>
     console.log(
       `\nTitle: ${book.volumeInfo.title}
