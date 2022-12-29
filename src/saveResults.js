@@ -13,47 +13,59 @@ const readFile = (file) => {
     return undefined;
   }
 };
+const invalidNumber = (number) => {
+  if (number < 0 || number > 4) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const duplicateBookinList = (book, currentList) => {
+  for (let i = 0; i < currentList.length; i++) {
+    if (book.id === currentList[i].id) {
+      console.log('You already added this book to your list!');
+      return true;
+    } else {
+      return false;
+    }
+  }
+};
+
+const numOfBooksInList = (currentList) => {
+  console.log(
+    `\nBook has been added to the list. You have ${currentList.length} book(s) on your list now.`
+  );
+};
 
 //Save the specified book number to reading list
 const saveByNumber = (number) => {
-  //Variable to hold the 5 books on the last search
-  const recentFiveSearched = readFile('RecentSearch.json');
+  const recentFiveSearched = readFile('RecentSearch.json'); //Variable to hold the 5 books on the last search
+  const readingList = 'readingList.json'; //Variable to hold reading list location
 
-  //Variable to hold reading list location
-  const readingList = 'readingList.json';
+  let invalidNum = invalidNumber(number); //Variable to check if the number selected is a valid number
 
-  //Selecting the specific book choosen by the user
-  if (number < 0 || number > 4) {
-    console.log('Please select a valid number.'); //invalid number entry by user
+  if (invalidNum) {
+    console.log('Please select a valid number.');
   } else {
     const bookAdded = recentFiveSearched[number]; //book selected by user
-    let duplicate = false; //boolean to check if user already added the book to list
     let currentList = readFile(readingList); //Get the current reading list
+    let duplicate = duplicateBookinList(bookAdded, currentList); //Boolean that checks if book already in list
 
     //If reading list is empty we initialize it with the book of choice, if it is not we add it.
     if (currentList === undefined) {
       currentList = [bookAdded];
-      console.log(
-        `\nBook has been added to the list. You have ${currentList.length} book(s) on your list now.`
-      );
+      return numOfBooksInList(currentList);
     } else {
       //logic to look through current reading list to make sure we are not adding duplicates
-      for (let i = 0; i < currentList.length; i++) {
-        if (bookAdded.id === currentList[i].id) {
-          console.log('You already added this book to your list!');
-          duplicate = true;
-        }
-      }
       if (!duplicate) {
         currentList.push(bookAdded);
-
-        console.log(
-          `\nBook has been added to the list. You have ${currentList.length} book(s) on your list now.`
-        );
+        numOfBooksInList(currentList);
       }
     }
     //update readingList.json file
     return saveToFile(readingList, currentList);
   }
 };
+
 module.exports = { saveToFile, saveByNumber, readFile };
