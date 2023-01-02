@@ -1,6 +1,7 @@
 const axios = require('axios'); //To retrieve information from Google Books API
 require('dotenv').config(); // module that allows us to access environmental variables
-const { saveToFile } = require('./saveResults');
+const { saveToFile, saveByNumber, trySavingAgain } = require('./saveResults');
+const inquirer = require('inquirer');
 
 const searchResults = async (search) => {
   try {
@@ -13,7 +14,7 @@ const searchResults = async (search) => {
     saveToFile('RecentSearch.json', books);
 
     //mapping through the 5 books found and showing only title, author, and publishing company
-    return books.map((book, key) =>
+    await books.map((book, key) =>
       console.log(
         `\nNumber:${key + 1}
         Title: ${book.volumeInfo.title}
@@ -21,6 +22,17 @@ const searchResults = async (search) => {
         Publishing Company: ${book.volumeInfo.publisher}\n`
       )
     );
+
+    let number = await inquirer.prompt({
+      type: 'number',
+      name: 'bookNum',
+      message: 'Which book number would you like to save?',
+    });
+
+    let bookNumber = number.bookNum - 1;
+
+    bookNumber === NaN ? trySavingAgain() : saveByNumber(bookNumber);
+    // return saveByNumber(bookNumber);
   } catch (error) {
     //Error handling incase no books matched a user's search
     console.error('No books matched your search! Please search again.');

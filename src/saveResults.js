@@ -1,4 +1,5 @@
 const fs = require('fs'); //Node.js file system that allows you to work with files in your local computer
+const inquirer = require('inquirer');
 
 //Save file to specified area.
 const saveToFile = (file, recentSearch) => {
@@ -22,9 +23,13 @@ const invalidNumber = (number) => {
 };
 
 const duplicateBookinList = (book, currentList) => {
+  if (currentList === undefined) {
+    return false;
+  }
+
   for (let i = 0; i < currentList.length; i++) {
     if (book.id === currentList[i].id) {
-      console.log('You already added this book to your list!');
+      console.log('You already added this book to your list!\n');
       return true;
     } else {
       return false;
@@ -38,8 +43,19 @@ const numOfBooksInList = (currentList) => {
   );
 };
 
+const trySavingAgain = async () => {
+  let number = await inquirer.prompt({
+    type: 'number',
+    name: 'bookNum',
+    message:
+      'Sorry, that is an invalid number. Please select a number between 1 and 5. ',
+  });
+  let bookNumber = number.bookNum - 1;
+  saveByNumber(bookNumber);
+};
+
 //Save the specified book number to reading list
-const saveByNumber = (number) => {
+const saveByNumber = async (number) => {
   const recentFiveSearched = readFile('RecentSearch.json'); //Variable to hold the 5 books on the last search
   const readingList = 'readingList.json'; //Variable to hold reading list location
 
@@ -47,6 +63,7 @@ const saveByNumber = (number) => {
 
   if (invalidNum) {
     console.log('Please select a valid number.');
+    trySavingAgain();
   } else {
     const bookAdded = recentFiveSearched[number]; //book selected by user
     let currentList = readFile(readingList); //Get the current reading list
@@ -55,7 +72,8 @@ const saveByNumber = (number) => {
     //If reading list is empty we initialize it with the book of choice, if it is not we add it.
     if (currentList === undefined) {
       currentList = [bookAdded];
-      return numOfBooksInList(currentList);
+
+      numOfBooksInList(currentList);
     } else {
       //logic to look through current reading list to make sure we are not adding duplicates
       if (!duplicate) {
@@ -64,8 +82,9 @@ const saveByNumber = (number) => {
       }
     }
     //update readingList.json file
-    return saveToFile(readingList, currentList);
+
+    saveToFile(readingList, currentList);
   }
 };
 
-module.exports = { saveToFile, saveByNumber, readFile };
+module.exports = { saveToFile, saveByNumber, readFile, trySavingAgain };

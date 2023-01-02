@@ -1,23 +1,59 @@
 const { searchResults } = require('./src/searchResults');
-const { saveByNumber } = require('./src/saveResults.js');
 const { viewList } = require('./src/viewList');
+const inquirer = require('inquirer');
 
 //Users can select either of these three cases
-switch (process.argv[2]) {
-  case 'search':
-    searchResults(process.argv[3]);
-    break;
-  case 'save':
-    if (isNaN(process.argv[3])) {
-      console.log('Please select a valid number');
-      break;
-    } else {
-      saveByNumber(process.argv[3] - 1);
+const userSelection = async () => {
+  let quitApplication = false;
+
+  while (!quitApplication) {
+    let val = await pickFromList();
+    console.log('\n');
+    switch (val.command) {
+      case 'search':
+        await searchResults(val.searchResult);
+        break;
+      case 'view':
+        await viewList();
+        break;
+      case 'quit':
+        console.log('Come back soon to add more books!');
+        quitApplication = true;
+        break;
+      default:
+        console.log('Needs to make a valid command.');
     }
-    break;
-  case 'view':
-    viewList();
-    break;
-  default:
-    console.log('Need to make a valid command.');
-}
+  }
+};
+
+const pickFromList = async () => {
+  let choice = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'command',
+      message: 'What do you want to pick?',
+      choices: [
+        { name: 'Search for books', value: 'search' },
+        { name: 'View your Reading list', value: 'view' },
+        { name: 'Quit application', value: 'quit' },
+      ],
+    },
+    {
+      type: 'input',
+      name: 'searchResult',
+      message: 'What type of books would you like to search for?',
+      when(answers) {
+        return answers.command === 'search';
+      },
+    },
+  ]);
+  return choice;
+};
+
+const startApp = async () => {
+  userSelection();
+};
+
+startApp();
+
+module.exports = { userSelection, pickFromList };
