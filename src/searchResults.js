@@ -22,20 +22,33 @@ const searchResults = async (search) => {
         Publishing Company: ${book.volumeInfo.publisher}\n`
       )
     );
-
-    let number = await inquirer.prompt({
-      type: 'number',
-      name: 'bookNum',
-      message: 'Which book number would you like to save?',
-    });
-
-    let bookNumber = number.bookNum - 1;
-
-    bookNumber === NaN ? trySavingAgain() : saveByNumber(bookNumber);
     // return saveByNumber(bookNumber);
   } catch (error) {
     //Error handling incase no books matched a user's search
     console.error('No books matched your search! Please search again.');
+  }
+
+  try {
+    let number = await inquirer.prompt({
+      type: 'input',
+      name: 'bookNum',
+      message: 'Which book number would you like to save?',
+      validate: (answer) => {
+        if (isNaN(answer)) {
+          return 'Please enter a number between 1 and 5.';
+        }
+        if (answer < 1 || answer > 5) {
+          return 'Please enter a number between 1 and 5.';
+        }
+        return true;
+      },
+    });
+
+    let bookNumber = number.bookNum - 1;
+
+    saveByNumber(bookNumber);
+  } catch {
+    trySavingAgain();
   }
 };
 
