@@ -3,23 +3,23 @@ require('dotenv').config(); // module that allows us to access environmental var
 const { saveToFile, saveByNumber } = require('./saveResults');
 const inquirer = require('inquirer');
 
+//FUNCTION THAT DISPLAYS 5 BOOKS
 const searchResults = async (search) => {
   try {
     let url = googleBooksAPI(search);
     const booksFound = await axios.get(url);
     let books = booksFound.data.items;
     saveToFile('RecentSearch.json', books);
-    booksOutput(books);
-    let userAnswer = await askUserToSave();
-
-    userToSaveOrMenu(userAnswer);
+    outputBooks(books);
+    let userAnswer = await askUserToSave(); //asking user to pick if he wants to save a book or not
+    executeUserDecision(userAnswer);
   } catch (error) {
     //Error handling incase no books matched a user's search
-
     console.log('No books matched your search! Please search again.');
   }
 };
 
+//FUNCTION THAT RETURNS URL FOR API CALL
 const googleBooksAPI = (search) => {
   let url = `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=books&startIndex=0&maxResults=5&projection=lite`;
   let editedUrl = url.replaceAll(' ', '%20');
@@ -27,19 +27,8 @@ const googleBooksAPI = (search) => {
   return editedUrl;
 };
 
-const userToSaveOrMenu = (userAnswer) => {
-  switch (userAnswer.command) {
-    case 'yes':
-      let bookNumber = userAnswer.bookNum - 1;
-      saveByNumber(bookNumber);
-    case 'no':
-      break;
-    default:
-      console.log('Needs to make a valid command.');
-  }
-};
-
-const booksOutput = async (books) => {
+//FUNCTION THAT FORMATS BOOK OUTPUTS
+const outputBooks = async (books) => {
   console.log('These are the books that we found!');
   //mapping through the 5 books found and showing only title, author, and publishing company
   await books.map((book, key) =>
@@ -52,6 +41,7 @@ const booksOutput = async (books) => {
   );
 };
 
+//FUNCTION THAT ASKS USER TO SAVE A BOOK OR GO BACK TO MENU
 const askUserToSave = async () => {
   let choice = await inquirer.prompt([
     {
@@ -82,6 +72,19 @@ const askUserToSave = async () => {
     },
   ]);
   return choice;
+};
+
+//FUNCTION THAT EXECUTES USER DECISION TO SAVE OR GO BACK TO MENU
+const executeUserDecision = (userAnswer) => {
+  switch (userAnswer.command) {
+    case 'yes':
+      let bookNumber = userAnswer.bookNum - 1;
+      saveByNumber(bookNumber);
+    case 'no':
+      break;
+    default:
+      console.log('Needs to make a valid command.');
+  }
 };
 
 module.exports = { searchResults, googleBooksAPI };

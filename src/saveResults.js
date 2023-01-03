@@ -15,6 +15,7 @@ const readFile = (file) => {
   }
 };
 
+//Checks if book already exists in reading list
 const duplicateBookinList = (book, currentList) => {
   if (currentList === undefined) {
     return false;
