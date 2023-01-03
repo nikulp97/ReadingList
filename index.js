@@ -3,12 +3,13 @@ const { viewList } = require('./src/viewList');
 const inquirer = require('inquirer');
 
 //Users can select either of these three cases
-const userSelection = async () => {
+const startReadingApp = async () => {
   let quitApplication = false;
 
   while (!quitApplication) {
     let val = await pickFromList();
-    console.log('\n');
+    console.clear();
+
     switch (val.command) {
       case 'search':
         await searchResults(val.searchResult);
@@ -50,10 +51,6 @@ const pickFromList = async () => {
   return choice;
 };
 
-const startApp = async () => {
-  userSelection();
-};
+startReadingApp();
 
-startApp();
-
-module.exports = { userSelection, pickFromList };
+module.exports = { startReadingApp, pickFromList };

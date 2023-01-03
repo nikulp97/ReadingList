@@ -3,7 +3,7 @@ const { readFile } = require('./saveResults');
 
 const viewList = () => {
   const currentList = readFile('readingList.json');
-  if (currentList === undefined){
+  if (currentList === undefined) {
     return console.log('There are no books in your list right now!');
   }
   console.log(`\n${currentList.length} total books in your Reading List!`);

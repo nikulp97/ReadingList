@@ -38,9 +38,19 @@ down below!
   Need to figure out how to make API key usable for other users. Currently, application works
   fine without API key.
 
+# Learning Points After 1st Submission
+
+- Write shorter and more readable function. It will help other engineers follow your logic.
+- Creating a navigable CLI interface. Utilizing Inquirer Prompt was really effective.
+- Write test cases! Need to practice more with Jest and other frameworks in the future.
+
 # Future Improvements
 
 - Remove or delete the entire reading list
 - Update order of reading list
-- Stop users from inserting the same book to reading list.
+- Stop users from inserting the same book to reading list. (Completed)
 - Work on writing test-cases (in process) from the beginning to lay the ground work.
+
+# Useful Links
+
+- https://www.npmjs.com/package/inquirer
