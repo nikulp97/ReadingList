@@ -47,6 +47,7 @@ test cases.
 - Write test cases! Need to practice more with Jest and other frameworks in the future.
 - Discovering new technologies that help capture user input in a CLI application. This project
   really helped me practice my documentation and research skills.
+- Need to advance my knowledge on how test cases would be more compatible with Inquirer Prompt.
 
 # Future Improvements
 
