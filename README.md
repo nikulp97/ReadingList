@@ -14,12 +14,11 @@ Purpose of this application is to search for books that you are interested in. W
 using the Google Books API to retrieve information on books depending on what we search for.
 At the time, we will only display 5 books from every search. The books will be numbered from
 1 to 5. If the user is interested they will add the book to their reading list, by specifying
-the number book they want. Please look at different commands we will use for our application
-down below!
+the number book they want. Please look at command we will use to start the application and use
+test cases.
 
-1. Search for books ---> `node index.js search <word>`
-2. Add book to the Reading List ---> `node index.js save <number>`
-3. View your Reading List ---> `node index.js view`
+1. Start application ---> `node index.js`
+2. Running test cases ---> `npm test`
 
 # Technologies/Libraries used
 
@@ -28,6 +27,9 @@ down below!
 - Axios to make HTTP requests from the browser to retrieve data from Google Books API
 - Dotenv module to load environment variables (our API key) to process.env
 - Node.js File System (fs) to work with file systems in our machine. Used to update readingList.json & RecentSearch.json
+- Inquirer Prompt is an NPM package I used to capture user input. It allow users to pick options and making
+  the application flow efficiently.
+- Jest (Javascript Testing Framework) to ensure correctness of code, and avoid errors.
 
 # Edge Cases/What I learned
 
@@ -43,6 +45,8 @@ down below!
 - Write shorter and more readable function. It will help other engineers follow your logic.
 - Creating a navigable CLI interface. Utilizing Inquirer Prompt was really effective.
 - Write test cases! Need to practice more with Jest and other frameworks in the future.
+- Discovering new technologies that help capture user input in a CLI application. This project
+  really helped me practice my documentation and research skills.
 
 # Future Improvements
 
@@ -54,3 +58,4 @@ down below!
 # Useful Links
 
 - https://www.npmjs.com/package/inquirer
+- https://jestjs.io/docs/getting-started
